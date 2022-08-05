@@ -7,6 +7,6 @@ RUN npm run build
 EXPOSE 3000
 ENV PORT 3000
 FROM nginx:1.23.1-alpine
-WORKDIR /usr/share/nginx/html
+WORKDIR /var/www/html
 COPY --from=builder /my-app/build .
 CMD ["nginx", "-g", "daemon off;"]

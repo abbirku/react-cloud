@@ -4,9 +4,6 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
-EXPOSE 3000
-ENV PORT 3000
-FROM nginx:1.23.1-alpine
-WORKDIR /var/www/html
-COPY --from=builder /my-app/build .
+FROM nginx:stable-alpine
+COPY --from=builder /my-app/build /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"]
